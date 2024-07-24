@@ -19,8 +19,6 @@ const Home: FC = () => {
   
 
   if (error) {
-    console.error(error);
-    
     return (
       <div>
         Failed to load
