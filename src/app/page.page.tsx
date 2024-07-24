@@ -14,9 +14,20 @@ interface User {
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Home: FC = () => {
-  const { data, error } = useSWR<User[]>("/api/data", fetcher);
+  const { data, error } = useSWR<User[]>("api/data", fetcher);
 
-  if (error) return <div>Failed to load</div>;
+  
+
+  if (error) {
+    console.error(error);
+    
+    return (
+      <div>
+        Failed to load
+        <div>{error.message}</div>
+      </div>
+    );
+  }
   if (!data) return <div>Loading...</div>;
 
   
@@ -31,6 +42,9 @@ const Home: FC = () => {
           </li>
         ))}
       </ul>
+
+      {/* about페이지로 이동하는 버튼 생성   */}
+      <a href="/about">About</a>
     </div>
   );
 };
